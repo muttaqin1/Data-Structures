@@ -4,7 +4,7 @@ export default class Stack<T> {
   constructor(private Top: NodeOrNull<T> = null) {}
 
   public GetTop(): T | null {
-    return this.Top ? this.Top.data : this.Top;
+    return this.Top ? this.Top.data : null;
   }
   public IsEmpty(): boolean {
     if (this.Top === null) return true;
