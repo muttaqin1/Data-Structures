@@ -1,4 +1,4 @@
-import { NodeOrNull, Node } from '../../Node/Node';
+import { NodeOrNull, Node } from '../Node/Node';
 
 export default class LinkedList<T> {
   constructor(
@@ -23,13 +23,11 @@ export default class LinkedList<T> {
     if (!this.Head && !this.Tail) {
       this.Head = newNode;
       this.Tail = newNode;
-      console.log('Node Appended');
       return;
     }
     if (this.Head && this.Tail) {
       this.Tail.next = newNode;
       this.Tail = newNode;
-      console.log('Node Appended');
     }
   }
   public PrependNode(data: T): void {
@@ -51,7 +49,6 @@ export default class LinkedList<T> {
     if (index == 0) {
       newNode.next = this.Head;
       this.Head = newNode;
-      console.log('Node Inserted');
     } else {
       while (pointer && pointer.next !== null) {
         if (index == count) break;
@@ -61,14 +58,12 @@ export default class LinkedList<T> {
       if (pointer && pointer.next) {
         newNode.next = pointer.next;
         pointer.next = newNode;
-        console.log('Node Inserted');
       }
     }
   }
   DeleteNode(index: number): void {
     if (index == 0 && this.Head) {
       this.Head = this.Head.next as NodeOrNull<T>;
-      console.log('Node Unlinked');
       return;
     }
     let pointer = this.Head;
@@ -80,7 +75,6 @@ export default class LinkedList<T> {
     }
     if (pointer?.next && pointer && index !== count) {
       pointer.next = pointer.next?.next;
-      console.log('Node unlinked');
     }
   }
 }

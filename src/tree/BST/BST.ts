@@ -1,5 +1,4 @@
-import { NodeOrNull, Node, INode } from '../../Node/TwoPonterNode';
-import Stack from '../../Stack';
+import { NodeOrNull, Node } from '../../Node/TwoPonterNode';
 
 export default class BST<T> {
   constructor(private Root: NodeOrNull<T> = null) {}
@@ -23,30 +22,43 @@ export default class BST<T> {
       }
     }
   }
-  /* depth first search */
-  //Preorder tree traversal
-  public PreorderTreeTraversal(): void {
-    if (!this.Root) return;
-    const stack = new Stack<INode<T>>();
-    stack.Push(this.Root);
-    while (!stack.IsEmpty()) {
-      let node = stack.GetTop();
-      console.log(`Node Data: ${node!.data}`);
-      stack.Pop();
-      if (node?.Left) stack.Push(node.Left);
-      if (node?.Right) stack.Push(node.Right);
-    }
+  /**
+   * preorderTreeTraverse
+   * @returns void
+   */
+  public preorderTreeTraverse(root: NodeOrNull<T> = this.Root): void {
+    if (root === null) return;
+    console.log(`Data: ${root.data}`);
+    this.preorderTreeTraverse(root.Left);
+    this.preorderTreeTraverse(root.Right);
   }
-  public InorderTreeTraversal(): void {}
+  /**
+   * inorderTreeTraversal
+   * @returns void
+   */
+  public inorderTreeTraverse(root: NodeOrNull<T> = this.Root): void {
+    if (root === null) return;
+    this.inorderTreeTraverse(root.Left);
+    console.log(`Data: ${root.data}`);
+    this.inorderTreeTraverse(root.Right);
+  }
+  /**
+   * postorderTreeTraverse
+   * @returns void
+   */
+  public postorderTreeTraverse(root: NodeOrNull<T> = this.Root): void {
+    if (root == null) return;
+    this.postorderTreeTraverse(root.Left);
+    this.postorderTreeTraverse(root.Right);
+    console.log(`Data: ${root.data}`);
+  }
 }
 
 const tree = new BST<number>();
-tree.InsertNode(5);
-tree.InsertNode(3);
-tree.InsertNode(4);
-tree.InsertNode(6);
-tree.InsertNode(2);
-tree.InsertNode(7);
-tree.InsertNode(1);
-
-tree.PreorderTreeTraversal();
+tree.InsertNode(30);
+tree.InsertNode(45);
+tree.InsertNode(18);
+tree.InsertNode(10);
+tree.InsertNode(25);
+tree.InsertNode(65);
+tree.postorderTreeTraverse();
