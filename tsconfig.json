@@ -11,7 +11,7 @@
     "outDir": "./build",
     "baseUrl": "./",
     "incremental": true,
-    "rootDir": "./",
+    "rootDir": "./src",
     "strict": true,
     "moduleResolution": "node",
     "paths": {

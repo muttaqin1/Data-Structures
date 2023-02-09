@@ -23,7 +23,7 @@ export default class BST<T> {
     }
   }
   /**
-   * preorderTreeTraverse
+   * preorderTreeTraversal
    * @returns void
    */
   public preorderTreeTraverse(root: NodeOrNull<T> = this.Root): void {
@@ -43,7 +43,7 @@ export default class BST<T> {
     this.inorderTreeTraverse(root.Right);
   }
   /**
-   * postorderTreeTraverse
+   * postorderTreeTraversal
    * @returns void
    */
   public postorderTreeTraverse(root: NodeOrNull<T> = this.Root): void {
@@ -51,6 +51,31 @@ export default class BST<T> {
     this.postorderTreeTraverse(root.Left);
     this.postorderTreeTraverse(root.Right);
     console.log(`Data: ${root.data}`);
+  }
+  /**
+   * height
+   * @returns number
+   */
+  public height(root: NodeOrNull<T> = this.Root): number {
+    if (!root) return -1;
+    let LeftHeight = this.height(root.Left);
+    let RightHeight = this.height(root.Right);
+    if (LeftHeight > RightHeight) return LeftHeight + 1;
+    else return RightHeight + 1;
+  }
+  /**
+   * search
+   * @returns Node or Null
+   */
+  public search(data: T): NodeOrNull<T> {
+    let temp = this.Root;
+    while (temp !== null) {
+      if (temp.data === data) {
+        return temp;
+      } else if (temp && temp.data > data) temp = temp.Left as NodeOrNull<T>;
+      else temp = temp.Right as NodeOrNull<T>;
+    }
+    return null;
   }
 }
 
@@ -61,4 +86,3 @@ tree.InsertNode(18);
 tree.InsertNode(10);
 tree.InsertNode(25);
 tree.InsertNode(65);
-tree.postorderTreeTraverse();
