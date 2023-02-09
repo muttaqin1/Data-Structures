@@ -2,6 +2,10 @@ import { NodeOrNull, Node } from '../../Node/TwoPonterNode';
 
 export default class BST<T> {
   constructor(private Root: NodeOrNull<T> = null) {}
+  /**
+   * InsertNode
+   * @returns void
+   */
   public InsertNode(data: T): void {
     if (!this.Root) {
       this.Root = new Node(data);
@@ -77,6 +81,23 @@ export default class BST<T> {
     }
     return null;
   }
+  private printLevelOrder(root: NodeOrNull<T>, level: number) {
+    if (!root) return;
+    else if (level === 0) console.log(`Data: ${root.data}`);
+    else {
+      this.printLevelOrder(root.Left as NodeOrNull<T>, level - 1);
+      this.printLevelOrder(root.Right as NodeOrNull<T>, level - 1);
+    }
+  }
+  /**
+   * breathFirstSearch
+   * @returns void
+   */
+  public breathFirstSearch(root: NodeOrNull<T> = this.Root) {
+    const height = this.height();
+    for (let level = 0; level <= height; level++)
+      this.printLevelOrder(root, level);
+  }
 }
 
 const tree = new BST<number>();
@@ -86,3 +107,4 @@ tree.InsertNode(18);
 tree.InsertNode(10);
 tree.InsertNode(25);
 tree.InsertNode(65);
+tree.breathFirstSearch();
