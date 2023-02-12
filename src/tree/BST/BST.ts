@@ -1,4 +1,4 @@
-import { NodeOrNull, Node } from '../../Node/TwoPonterNode';
+import { NodeOrNull, Node } from './Node';
 
 export default class BST<T> {
   constructor(private Root: NodeOrNull<T> = null) {}
@@ -98,6 +98,30 @@ export default class BST<T> {
     for (let level = 0; level <= height; level++)
       this.printLevelOrder(root, level);
   }
+  private getMinValue(node: NodeOrNull<T>): NodeOrNull<T> {
+    let current = node;
+    while (current?.Left !== null) current = current!.Left as NodeOrNull<T>;
+    return current;
+  }
+  /**
+   * DeleteNode
+   */
+  public DeleteNode(value: number, root: NodeOrNull<T> = this.Root) {
+    if (root === null) return;
+    else if (value < root.data) this.DeleteNode(value, root.Left);
+    else if (value > root.data) this.DeleteNode(value, root.Right);
+    else {
+      if (root.Left == null) return root.Right;
+      else if (root.Right == null) return root.Left;
+      else {
+        let temp = this.getMinValue(root.Right);
+        root.data = temp!.data;
+        let temp1 = temp!.data as number;
+        root.Right = this.DeleteNode(temp1, root.Right);
+      }
+    }
+    return root;
+  }
 }
 
 const tree = new BST<number>();
@@ -107,4 +131,5 @@ tree.InsertNode(18);
 tree.InsertNode(10);
 tree.InsertNode(25);
 tree.InsertNode(65);
+tree.DeleteNode(65);
 tree.breathFirstSearch();
