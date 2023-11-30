@@ -1,8 +1,8 @@
 import { NodeOrNull, Node, INode } from './Node';
 
 export default class LinkedList<T> {
-  private Head: NodeOrNull<T> = null;
-  private Tail: NodeOrNull<T> = null;
+  public Head: NodeOrNull<T> = null;
+  public Tail: NodeOrNull<T> = null;
 
   public DisplayNode(): void {
     let pointer = this.Head;
